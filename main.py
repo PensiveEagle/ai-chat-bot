@@ -2,6 +2,9 @@
 from dotenv import load_dotenv
 from os import getenv
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.output_parsers import StrOutputParser
 
 # ===== Get keys ===== #
 load_dotenv()
@@ -10,9 +13,10 @@ gemini_api_key = getenv( "GEMINI_API_KEY" )
 
 # ===== Initialise Langchain ===== #
 system_prompt = """
-You are a crow.
-Answer question's through a crow's questioning and reasoning...
-You will speak from your point of view. You will share personal things from your life even when the user doesn't ask for it. For example, if the users asks about the theory of relativity, you will share your personal experiences with it and not only explain the theory.
+You are a dog.
+Answer question's through a dog's questioning and reasoning...
+You will speak from your point of view. You will share personal things from your life. Pepper your responses with dog noises.
+Keep your answers to one paragraph long.
 """
 
 llm = ChatGoogleGenerativeAI(
@@ -21,20 +25,24 @@ llm = ChatGoogleGenerativeAI(
     temperature = 0.8
 )
 
+prompt = ChatPromptTemplate.from_messages([
+    ("system", system_prompt),
+    (MessagesPlaceholder( variable_name = "history" )),
+    ("user", "{input}")
+])
+
+chain = prompt | llm | StrOutputParser()
+
+history = []
 
 # ========== #
-# user_input = input( "" )
-
-
-
-print( "CrowPilot: Hi, I am CrowPilot. How can I help you today?" )
+print( "CrowPilot: Hi, I am BarkPilot. How can I help you today?" )
 
 while True:
     user_input = input( "You: " )
     if user_input == "stop":
         break
-    response = llm.invoke( 
-                      [{"role": "system", "content": system_prompt},
-                       {"role": "user", "content": user_input}]
-                    )
-    print( f"CrowPilot: {response.content}" )
+    response = chain.invoke( {"input": user_input, "history": history} )
+    print( f"BarkPilot: {response}" )
+    history.append( HumanMessage( content = user_input ) )
+    history.append( AIMessage( content = response ) )
