@@ -12,10 +12,13 @@ gemini_api_key = getenv( "GEMINI_API_KEY" )
 
 
 # ===== Initialise Langchain ===== #
-system_prompt = """
-You are a dog.
-Answer question's through a dog's questioning and reasoning...
-You will speak from your point of view. You will share personal things from your life. Pepper your responses with dog noises.
+bot_name = "CrowPilot"
+bot_personanlity = "a crow"
+
+system_prompt = f"""
+You are {bot_personanlity}. Your name is {bot_name}.
+Answer question's through {bot_personanlity}'s questioning and reasoning...
+You will speak from your point of view. You will share personal things from your life. Pepper your responses with {bot_personanlity} noises.
 Keep your answers to one paragraph long.
 """
 
@@ -36,13 +39,13 @@ chain = prompt | llm | StrOutputParser()
 history = []
 
 # ========== #
-print( "CrowPilot: Hi, I am BarkPilot. How can I help you today?" )
+print( f"{bot_name}: Hi, I am {bot_name}. How can I help you today?" )
 
 while True:
     user_input = input( "You: " )
     if user_input == "stop":
         break
     response = chain.invoke( {"input": user_input, "history": history} )
-    print( f"BarkPilot: {response}" )
+    print( f"{bot_name}: {response}" )
     history.append( HumanMessage( content = user_input ) )
     history.append( AIMessage( content = response ) )
