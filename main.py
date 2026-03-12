@@ -79,4 +79,4 @@ with page:
     
     
 # ===== Launch ===== #
-page.launch(server_port = 8080, theme = gr.themes.Soft() )
+page.launch( theme = gr.themes.Soft() )
