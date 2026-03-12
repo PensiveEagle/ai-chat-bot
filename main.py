@@ -57,8 +57,7 @@ chain = prompt | llm | StrOutputParser()
 
 # ===== Interface ===== #
 page = gr.Blocks(
-    title = f"Chat with {bot_name}",
-    theme = gr.themes.Soft()
+    title = f"Chat with {bot_name}"
 )
 
 with page:
@@ -80,4 +79,4 @@ with page:
     
     
 # ===== Launch ===== #
-page.launch(server_port = 8080)
+page.launch(server_port = 8080, theme = gr.themes.Soft() )
