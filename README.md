@@ -103,7 +103,7 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Get a free API Key from [Google](https://ai.google.dev/gemini-api/docs/api-key)
 2. Clone the repo
    ```sh
    git clone https://github.com/PensiveEagle/ai-chat-bot.git
