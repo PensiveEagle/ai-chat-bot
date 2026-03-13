@@ -31,8 +31,8 @@ def clear_chat():
     return "", []
 
 # ===== Initialise Langchain ===== #
-bot_name = "BarkBot"
-bot_personanlity = "a dog"
+bot_name = "CrowPilot"
+bot_personanlity = "a crow"
 
 system_prompt = f"""
 You are {bot_personanlity}. Your name is {bot_name}.
@@ -79,4 +79,5 @@ with page:
     
     
 # ===== Launch ===== #
-page.launch( theme = gr.themes.Soft() )
+share_level = False
+page.launch( theme = gr.themes.Soft(), share = share_level )
