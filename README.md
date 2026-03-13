@@ -118,6 +118,11 @@ This is an example of how to list things you need to use the software and how to
    git remote set-url origin PensiveEagle/ai-chat-bot
    git remote -v # confirm the changes
    ```
+7. Set the chatbot name and personality in `main.py`
+   ```python
+   bot_name = "YOUR CHOSEN BOT NAME"
+   bot_personanlity = "THE PERSONALITY OF THE BOT - E.G. A DOG"
+   ```
 6. Build the docker image
    ```sh
    docker build -t ai-chatbot-app .
